@@ -9,13 +9,13 @@
     <style type="text/css">
         body { font-family: Arial, sans-serif; padding: 20px; font-size: 14px; background-color: #fafafa; }
         input { text-align: right; margin-right: 6px; }
-        .supplier-panel { margin-bottom: 20px; padding: 15px 20px; background-color: #f0f8ff; border: 1px solid #cce5ff; border-radius: 6px; max-width: 900px; }
+        .supplier-panel { margin-bottom: 20px; padding: 15px 20px; background-color: #f0f8ff; border: 1px solid #cce5ff; border-radius: 6px; max-width: 950px; }
         .mm-input { width: 45px; padding: 4px; text-align: center; }
         select { padding: 4px; }
         .table-calc { border-collapse: collapse; margin-bottom: 25px; }
         .table-calc td { padding: 8px 12px; }
         
-        .search-box-wrap { display: inline-block; position: relative; width: 450px; }
+        .search-box-wrap { display: inline-block; position: relative; width: 480px; }
         .search-input { width: 100%; padding: 6px 10px; font-size: 13px; box-sizing: border-box; }
         .search-results { 
             position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #999; 
@@ -40,6 +40,7 @@
         .btn-outline-danger { background-color: transparent; color: #dc3545; border: 1px solid #dc3545; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; }
         .kp-badge { display: flex; align-items: center; background: #fff; border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
         .kp-badge-btn { margin-left: 8px; color: #dc3545; background: none; border: none; font-weight: bold; cursor: pointer; font-size: 14px; line-height: 1; padding: 0 4px; }
+        .option-label { cursor: pointer; margin-right: 20px; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -71,6 +72,16 @@
                 <span>Цветов сзади (0-3):</span>
                 <input type="number" id="ppBack" value="0" min="0" max="3" class="mm-input">
             </span>
+        </div>
+
+        <div id="extraOptionsRow" style="margin-bottom: 15px; padding-top: 10px; border-top: 1px dashed #cce5ff; display: none;">
+            <span style="display: inline-block; width: 110px; font-weight: bold;">Доп. опции:</span>
+            <label class="option-label">
+                <input type="checkbox" id="optHandle"> Замена ручек (+100 ₸/шт)
+            </label>
+            <label class="option-label">
+                <input type="checkbox" id="optBow"> Бант (вырез и лента) (+100 ₸/шт)
+            </label>
         </div>
         
         <div style="display: flex; align-items: center; gap: 15px;">
@@ -114,11 +125,11 @@
             <table id="kpCopyTable" width="100%" border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse; border: 1px solid #000; font-family: 'Times New Roman', Times, serif; font-size: 14px;">
                 <colgroup>
                     <col width="5%">
-                    <col width="32%">
-                    <col width="25%">
+                    <col width="30%">
+                    <col width="27%">
                     <col width="10%">
-                    <col width="11%">
-                    <col width="9%">
+                    <col width="10%">
+                    <col width="10%">
                     <col width="8%">
                 </colgroup>
                 <thead style="background-color: #f2f2f2;">
@@ -146,6 +157,25 @@
     </div>
 
 <script type="text/javascript">
+function getDeliveryDays(qty) {
+    let q = Number(qty) || 0;
+    if (q <= 200) return '5-7';
+    if (q <= 300) return '7-8';
+    if (q <= 500) return '7-9';
+    if (q <= 750) return '9-10';
+    if (q <= 1000) return '9-11';
+    return 'Уточнить у менеджера';
+}
+
+const deliveryPriority = {
+    '5-7': 1,
+    '7-8': 2,
+    '7-9': 3,
+    '9-10': 4,
+    '9-11': 5,
+    'Уточнить у менеджера': 6
+};
+
 var selectedProduct = null;
 var kpItems = [];
 
@@ -157,7 +187,6 @@ function colorWords(num) {
 }
 
 $(document).ready(function() {
-    // 1. Поиск по продукции
     $('#ppSearch').on('input focus', function() {
         let query = $(this).val().toLowerCase().trim();
         let $res = $('#ppSearchResults');
@@ -188,7 +217,6 @@ $(document).ready(function() {
         $res.show();
     });
 
-    // 2. Выбор товара из поиска
     $(document).on('click', '.search-item', function() {
         let id = $(this).data('id');
         selectedProduct = propaketCatalog.find(p => p.id === id);
@@ -198,7 +226,6 @@ $(document).ready(function() {
             $('#ppSearchResults').hide();
             $('#clearSearch').show();
 
-            // Заполняем выпадающий список размеров
             let $size = $('#ppSize');
             $size.empty();
             for (let sizeKey in selectedProduct.sizes) {
@@ -212,7 +239,14 @@ $(document).ready(function() {
             $('#sizeRow').show();
             $('#colorRow').show();
 
-            // Если у товара печать только в 1 цвет (тишью, ленты и т.д.)
+            if (selectedProduct.allowBagsExtra) {
+                $('#extraOptionsRow').show();
+            } else {
+                $('#extraOptionsRow').hide();
+                $('#optHandle').prop('checked', false);
+                $('#optBow').prop('checked', false);
+            }
+
             if (selectedProduct.maxColors <= 1) {
                 $('#ppFront').val(1).prop('disabled', true);
                 $('#backColorsWrap').hide();
@@ -230,7 +264,9 @@ $(document).ready(function() {
     $('#clearSearch').click(function() {
         selectedProduct = null;
         $('#ppSearch').val('');
-        $('#clearSearch, #sizeRow, #colorRow, #ppCostBadge, #btn-add-kp').hide();
+        $('#clearSearch, #sizeRow, #colorRow, #extraOptionsRow, #ppCostBadge, #btn-add-kp').hide();
+        $('#optHandle').prop('checked', false);
+        $('#optBow').prop('checked', false);
         $('#outUnit').val(0);
         $('#outTotal').val(0);
     });
@@ -241,9 +277,8 @@ $(document).ready(function() {
         }
     });
 
-    $('#ppSize').change(calc);
+    $('#ppSize, #optHandle, #optBow').change(calc);
 
-    // 3. Добавление в спецификацию КП
     $('#btn-add-kp').click(function() {
         if (!selectedProduct) return;
 
@@ -268,12 +303,19 @@ $(document).ready(function() {
             printText += `, сзади в ${colorWords(backColors)} методом шелкографии`;
         }
 
+        let extraText = [];
+        if ($('#optHandle').is(':checked')) extraText.push('замена ручек (+100 ₸)');
+        if ($('#optBow').is(':checked')) extraText.push('бант (+100 ₸)');
+        if (extraText.length > 0) {
+            printText += `<br><i>Доп. опции: ${extraText.join(', ')}</i>`;
+        }
+
         let sizeLabelFull = meta 
             ? (meta.d > 0 ? `Ширина ${meta.w} мм, Высота ${meta.h} мм, Глубина ${meta.d} мм (${orientStr})` : `Ширина ${meta.w} мм, Высота ${meta.h} мм (${orientStr})`)
             : sizeKey;
 
         let descHtml = `Размер: ${sizeLabelFull}<br>${printText}`;
-        let deliveryDays = (qty >= 500) ? '9-11' : '5-7';
+        let deliveryDays = getDeliveryDays(qty);
 
         kpItems.push({
             id: Date.now() + Math.random(),
@@ -338,11 +380,17 @@ function renderKpTable() {
     tbody.empty();
     badgesContainer.empty();
     let grandTotal = 0;
-    let maxDelivery = '5-7';
+    let maxPriority = 1;
+    let maxDeliveryText = '5-7';
 
     kpItems.forEach((item, idx) => {
         grandTotal += item.total;
-        if (item.delivery === '9-11') maxDelivery = '9-11';
+        
+        let p = deliveryPriority[item.delivery] || 1;
+        if (p > maxPriority) {
+            maxPriority = p;
+            maxDeliveryText = item.delivery;
+        }
         
         tbody.append(`
             <tr>
@@ -364,7 +412,7 @@ function renderKpTable() {
         `);
     });
     $('#kpGrandTotal').text(grandTotal);
-    $('#kpGrandDelivery').text(maxDelivery);
+    $('#kpGrandDelivery').text(maxDeliveryText);
 }
 
 function calc() {
@@ -380,8 +428,10 @@ function calc() {
 
     let quantity = Number($('#inQty').val()) || 1;
     let size = $('#ppSize').val();
+    let addHandle = $('#optHandle').is(':checked');
+    let addBow = $('#optBow').is(':checked');
     
-    let info = calculatePropaketItem(selectedProduct, size, quantity, ppFront, ppBack);
+    let info = calculatePropaketItem(selectedProduct, size, quantity, ppFront, ppBack, addHandle, addBow);
     if (info && info.cost > 0) {
         let actualUnitPrice = Math.round(info.cost / quantity);
         
