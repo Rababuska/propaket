@@ -74,7 +74,8 @@
             </span>
         </div>
 
-        <div id="extraOptionsRow" style="margin-bottom: 15px; padding-top: 10px; border-top: 1px dashed #cce5ff; display: none;">
+        <!-- ОПЦИИ РУЧЕК И БАНТА (Показываются всегда для любого пакета) -->
+        <div id="extraOptionsRow" style="margin-bottom: 15px; padding-top: 10px; border-top: 1px dashed #cce5ff;">
             <span style="display: inline-block; width: 110px; font-weight: bold;">Доп. опции:</span>
             <label class="option-label">
                 <input type="checkbox" id="optHandle"> Замена ручек (+100 ₸/шт)
@@ -239,14 +240,6 @@ $(document).ready(function() {
             $('#sizeRow').show();
             $('#colorRow').show();
 
-            if (selectedProduct.allowBagsExtra) {
-                $('#extraOptionsRow').show();
-            } else {
-                $('#extraOptionsRow').hide();
-                $('#optHandle').prop('checked', false);
-                $('#optBow').prop('checked', false);
-            }
-
             if (selectedProduct.maxColors <= 1) {
                 $('#ppFront').val(1).prop('disabled', true);
                 $('#backColorsWrap').hide();
@@ -264,7 +257,7 @@ $(document).ready(function() {
     $('#clearSearch').click(function() {
         selectedProduct = null;
         $('#ppSearch').val('');
-        $('#clearSearch, #sizeRow, #colorRow, #extraOptionsRow, #ppCostBadge, #btn-add-kp').hide();
+        $('#clearSearch, #sizeRow, #colorRow, #ppCostBadge, #btn-add-kp').hide();
         $('#optHandle').prop('checked', false);
         $('#optBow').prop('checked', false);
         $('#outUnit').val(0);
