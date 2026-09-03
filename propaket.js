@@ -1,14 +1,13 @@
 // ==========================================
-// ПОЛНАЯ БАЗА ТОВАРОВ PROPAKET
+// БАЗА ДАННЫХ И ТАРИФЫ PROPAKET
 // ==========================================
 
 const propaketCatalog = [
-    // 1. ПВД БЕЛЫЕ (Шелкография)
     {
         id: 'pvd_white',
         name: 'Пакеты ПВД (Белые)',
         keywords: 'пакет полиэтиленовый пвд белый шелкография',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: true,
         sizes: {
             "200x240 мм (вертикальный)": { w: 200, h: 240, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 100}, {max: 499, p: 95}, {max: Infinity, p: 90}] },
             "250x350 мм (вертикальный)": { w: 250, h: 350, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 120}, {max: 499, p: 110}, {max: Infinity, p: 100}] },
@@ -18,13 +17,11 @@ const propaketCatalog = [
             "600x630 мм (вертикальный)": { w: 600, h: 630, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 190}, {max: 499, p: 180}, {max: Infinity, p: 170}] }
         }
     },
-
-    // 2. ПВД ЦВЕТНЫЕ И ЧЕРНЫЕ (Шелкография)
     {
         id: 'pvd_color',
         name: 'Пакеты ПВД (Цветные / Черные)',
         keywords: 'пакет полиэтиленовый пвд цветной черный шелкография',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: true,
         sizes: {
             "200x240 мм (вертикальный)": { w: 200, h: 240, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 110}, {max: 499, p: 105}, {max: 19999, p: 100}, {max: Infinity, p: 37}] },
             "250x350 мм (вертикальный)": { w: 250, h: 350, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 130}, {max: 499, p: 120}, {max: 4999, p: 110}, {max: Infinity, p: 42}] },
@@ -34,13 +31,11 @@ const propaketCatalog = [
             "600x630 мм (вертикальный)": { w: 600, h: 630, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 200}, {max: 499, p: 190}, {max: 4999, p: 180}, {max: Infinity, p: 87}] }
         }
     },
-
-    // 3. БУМАЖНЫЕ ПАКЕТЫ ПЛОТНЫЕ 260 ГР (Белые / Черные)
     {
         id: 'paper_white_black',
         name: 'Бумажные пакеты плотные 260 гр (Белые / Черные)',
         keywords: 'пакет бумажный плотный припресс 260 белый черный',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 24, minQty: 24,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 24, minQty: 24, allowBagsExtra: true,
         sizes: {
             "120x160x70 мм (вертикальный)": { w: 120, h: 160, d: 70, orient: "вертикальный", tiers: [{max: 48, p: 340}, {max: 180, p: 330}, {max: Infinity, p: 310}] },
             "180x230x100 мм (вертикальный)": { w: 180, h: 230, d: 100, orient: "вертикальный", tiers: [{max: 48, p: 415}, {max: 180, p: 395}, {max: Infinity, p: 380}] },
@@ -54,13 +49,11 @@ const propaketCatalog = [
             "600x400x220 мм (горизонтальный)": { w: 600, h: 400, d: 220, orient: "горизонтальный", tiers: [{max: 48, p: 1255}, {max: 180, p: 1180}, {max: Infinity, p: 1130}] }
         }
     },
-
-    // 4. БУМАЖНЫЕ ПАКЕТЫ ПЛОТНЫЕ ЦВЕТНЫЕ 260 ГР (только горизонтальные)
     {
         id: 'paper_color',
         name: 'Бумажные пакеты плотные 260 гр (Цветные горизонтальные)',
         keywords: 'пакет бумажный плотный цветной горизонтальный припресс 260',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 60, minQty: 60,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 60, minQty: 60, allowBagsExtra: true,
         sizes: {
             "150x140x70 мм (горизонтальный)": { w: 150, h: 140, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 330}, {max: 324, p: 310}, {max: 444, p: 290}, {max: Infinity, p: 270}] },
             "230x180x100 мм (горизонтальный)": { w: 230, h: 180, d: 100, orient: "горизонтальный", tiers: [{max: 204, p: 395}, {max: 324, p: 375}, {max: 444, p: 355}, {max: Infinity, p: 335}] },
@@ -68,25 +61,21 @@ const propaketCatalog = [
             "380x320x120 (400x300) мм (горизонтальный)": { w: 380, h: 320, d: 120, orient: "горизонтальный", tiers: [{max: 204, p: 670}, {max: 324, p: 650}, {max: 444, p: 630}, {max: Infinity, p: 610}] }
         }
     },
-
-    // 5. БУМАЖНЫЕ КВАДРАТНЫЕ ПАКЕТЫ 260 ГР
     {
         id: 'paper_square',
         name: 'Бумажные квадратные пакеты (Коричневый / Белый)',
         keywords: 'пакет бумажный квадратный 25х25 30х30 коричневый белый',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108, allowBagsExtra: true,
         sizes: {
             "250x250x250 мм (квадратный)": { w: 250, h: 250, d: 250, orient: "квадратный", tiers: [{max: 204, p: 1150}, {max: 324, p: 1130}, {max: 444, p: 1110}, {max: Infinity, p: 1060}] },
             "300x300x300 мм (квадратный)": { w: 300, h: 300, d: 300, orient: "квадратный", tiers: [{max: 204, p: 1250}, {max: 324, p: 1220}, {max: 444, p: 1190}, {max: Infinity, p: 1150}] }
         }
     },
-
-    // 6. ПЛОТНЫЕ ПОЛНОЦВЕТНЫЕ ПАКЕТЫ (Полноцветная печать / Картон)
     {
         id: 'paper_fullcolor',
         name: 'Плотные полноцветные пакеты (Картон / Ламинация)',
         keywords: 'пакет полноцветный картон печать ламинация индивидуальный',
-        colorPriceStep: 0, maxColors: 1, defaultQty: 50, minQty: 50,
+        colorPriceStep: 0, maxColors: 1, defaultQty: 50, minQty: 50, allowBagsExtra: true,
         sizes: {
             "170x150x70 мм (Без полной заливки)": { w: 170, h: 150, d: 70, orient: "вертикальный", tiers: [{max: Infinity, p: 800}] },
             "170x150x70 мм (С полной заливкой)": { w: 170, h: 150, d: 70, orient: "вертикальный", tiers: [{max: Infinity, p: 1090}] },
@@ -101,13 +90,11 @@ const propaketCatalog = [
             "330x220x70 мм (вертикальный)": { w: 330, h: 220, d: 70, orient: "вертикальный", tiers: [{max: 99, p: 1605}, {max: 199, p: 1270}, {max: Infinity, p: 870}] }
         }
     },
-
-    // 7. КРАФТ ПАКЕТЫ 80 ГР (Бурые с ручками, вертикальные)
     {
         id: 'kraft_brown',
         name: 'Крафт пакет с ручками 80 гр (Бурый)',
         keywords: 'крафт пакет бурый с ручками стандартный 80',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: true,
         sizes: {
             "220x250x120 мм (вертикальный)": { w: 220, h: 250, d: 120, orient: "вертикальный", tiers: [{max: 499, p: 170}, {max: 1999, p: 155}, {max: Infinity, p: 145}] },
             "240x280x140 мм (вертикальный)": { w: 240, h: 280, d: 140, orient: "вертикальный", tiers: [{max: 499, p: 175}, {max: 1999, p: 165}, {max: Infinity, p: 155}] },
@@ -116,13 +103,11 @@ const propaketCatalog = [
             "350x450x150 мм (вертикальный)": { w: 350, h: 450, d: 150, orient: "вертикальный", tiers: [{max: 499, p: 205}, {max: 1999, p: 195}, {max: Infinity, p: 185}] }
         }
     },
-
-    // 8. КРАФТ ПАКЕТЫ 80 ГР (Белые с ручками, вертикальные)
     {
         id: 'kraft_white',
         name: 'Крафт пакет с ручками 80 гр (Белый)',
         keywords: 'крафт пакет белый с ручками стандартный 80',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: true,
         sizes: {
             "220x250x120 мм (вертикальный)": { w: 220, h: 250, d: 120, orient: "вертикальный", tiers: [{max: 499, p: 190}, {max: 1999, p: 175}, {max: Infinity, p: 165}] },
             "240x280x140 мм (вертикальный)": { w: 240, h: 280, d: 140, orient: "вертикальный", tiers: [{max: 499, p: 195}, {max: 1999, p: 185}, {max: Infinity, p: 175}] },
@@ -131,25 +116,21 @@ const propaketCatalog = [
             "350x450x150 мм (вертикальный)": { w: 350, h: 450, d: 150, orient: "вертикальный", tiers: [{max: 499, p: 235}, {max: 1999, p: 225}, {max: Infinity, p: 215}] }
         }
     },
-
-    // 9. КРАФТ ПАКЕТЫ ГОРИЗОНТАЛЬНЫЕ ПЛОТНЫЕ (Белый / Бурый)
     {
         id: 'kraft_horizontal',
         name: 'Крафт пакет плотный (Горизонтальный)',
         keywords: 'крафт пакет горизонтальный плотный белый бурый ручки',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: true,
         sizes: {
             "320x250x110 мм (горизонтальный)": { w: 320, h: 250, d: 110, orient: "горизонтальный", tiers: [{max: 499, p: 265}, {max: 1999, p: 255}, {max: Infinity, p: 245}] },
             "400x310x130 мм (горизонтальный)": { w: 400, h: 310, d: 130, orient: "горизонтальный", tiers: [{max: 499, p: 375}, {max: 1999, p: 365}, {max: Infinity, p: 355}] }
         }
     },
-
-    // 10. КРАФТ ПАКЕТЫ ЦВЕТНЫЕ
     {
         id: 'kraft_color',
         name: 'Крафт пакет цветной',
         keywords: 'крафт пакет цветной ручки цвета уточнять',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108, allowBagsExtra: true,
         sizes: {
             "120x160 мм (вертикальный)": { w: 120, h: 160, d: 0, orient: "вертикальный", tiers: [{max: 504, p: 215}, {max: 2004, p: 205}, {max: Infinity, p: 195}] },
             "160x220 мм (вертикальный)": { w: 160, h: 220, d: 0, orient: "вертикальный", tiers: [{max: 504, p: 235}, {max: 2004, p: 225}, {max: Infinity, p: 215}] },
@@ -161,13 +142,11 @@ const propaketCatalog = [
             "440x400 мм (горизонтальный)": { w: 440, h: 400, d: 0, orient: "горизонтальный", tiers: [{max: 504, p: 385}, {max: 2004, p: 375}, {max: Infinity, p: 365}] }
         }
     },
-
-    // 11. КРАФТ БЕЗ РУЧЕК (Бурый)
     {
         id: 'kraft_no_handles_brown',
         name: 'Крафт пакет без ручек (Бурый)',
         keywords: 'крафт без ручек бурый фасовка еда на вынос саше',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "80x50x170 мм (бурый)": { w: 80, h: 170, d: 50, orient: "вертикальный", tiers: [{max: 199, p: 69}, {max: Infinity, p: 65}] },
             "180x120x290 мм (бурый)": { w: 180, h: 290, d: 120, orient: "вертикальный", tiers: [{max: 199, p: 102}, {max: Infinity, p: 97}] },
@@ -177,26 +156,22 @@ const propaketCatalog = [
             "320x200x340 мм (бурый)": { w: 320, h: 340, d: 200, orient: "вертикальный", tiers: [{max: 199, p: 250}, {max: Infinity, p: 245}] }
         }
     },
-
-    // 12. КРАФТ БЕЗ РУЧЕК (Белый)
     {
         id: 'kraft_no_handles_white',
         name: 'Крафт пакет без ручек (Белый)',
         keywords: 'крафт без ручек белый фасовка еда выпечка',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "80x50x170 мм (белый)": { w: 80, h: 170, d: 50, orient: "вертикальный", tiers: [{max: 199, p: 95}, {max: Infinity, p: 90}] },
             "180x120x290 мм (белый)": { w: 180, h: 290, d: 120, orient: "вертикальный", tiers: [{max: 199, p: 198}, {max: Infinity, p: 191}] },
             "260x150x340 мм (белый)": { w: 260, h: 340, d: 150, orient: "вертикальный", tiers: [{max: 199, p: 265}, {max: Infinity, p: 260}] }
         }
     },
-
-    // 13. СЛАЙДЕРЫ / ZIP ПАКЕТЫ (Белые матовые)
     {
         id: 'zip_white',
         name: 'Слайдер / Zip пакеты (Белые матовые)',
         keywords: 'зип zip слайдер пакет замок бегунок белый матовый одежда купальники',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "110x220 мм": { w: 110, h: 220, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 170}, {max: 499, p: 150}, {max: Infinity, p: 140}] },
             "140x200 мм": { w: 140, h: 200, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 155}, {max: 499, p: 135}, {max: Infinity, p: 125}] },
@@ -209,38 +184,32 @@ const propaketCatalog = [
             "400x500 мм": { w: 400, h: 500, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 240}, {max: 499, p: 220}, {max: Infinity, p: 210}] }
         }
     },
-
-    // 14. СЛАЙДЕРЫ / ZIP ПАКЕТЫ (Черные)
     {
         id: 'zip_black',
         name: 'Слайдер / Zip пакеты (Черные)',
         keywords: 'зип zip слайдер пакет черный замок бегунок одежда',
-        colorPriceStep: 45, maxColors: 1, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 1, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "170x250 мм (горизонтальный)": { w: 250, h: 170, d: 0, orient: "горизонтальный", tiers: [{max: 199, p: 165}, {max: 499, p: 150}, {max: Infinity, p: 140}] },
             "250x350 мм": { w: 250, h: 350, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 200}, {max: 499, p: 185}, {max: Infinity, p: 175}] },
             "300x400 мм": { w: 300, h: 400, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 210}, {max: 499, p: 195}, {max: Infinity, p: 185}] }
         }
     },
-
-    // 15. СЛАЙДЕРЫ / ZIP ПАКЕТЫ (Розовые)
     {
         id: 'zip_pink',
         name: 'Слайдер / Zip пакеты (Розовые)',
         keywords: 'зип zip слайдер пакет розовый замок бегунок',
-        colorPriceStep: 45, maxColors: 1, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 1, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "200x250 мм": { w: 200, h: 250, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 170}, {max: 499, p: 155}, {max: Infinity, p: 145}] },
             "300x400 мм": { w: 300, h: 400, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 210}, {max: 499, p: 195}, {max: Infinity, p: 185}] }
         }
     },
-
-    // 16. ПРОЗРАЧНЫЕ ПАКЕТЫ
     {
         id: 'transparent_bags',
         name: 'Прозрачные пакеты с ручками',
         keywords: 'пакет прозрачный прозрачные ручки пвх силикон',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108, allowBagsExtra: true,
         sizes: {
             "150x110x70 мм": { w: 150, h: 110, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 650}, {max: 324, p: 630}, {max: 444, p: 610}, {max: Infinity, p: 590}] },
             "200x130x70 мм": { w: 200, h: 130, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 630}, {max: 324, p: 690}, {max: 444, p: 670}, {max: Infinity, p: 650}] },
@@ -250,13 +219,11 @@ const propaketCatalog = [
             "320x260x90 мм": { w: 320, h: 260, d: 90, orient: "горизонтальный", tiers: [{max: 204, p: 990}, {max: 324, p: 970}, {max: 444, p: 950}, {max: Infinity, p: 930}] }
         }
     },
-
-    // 17. ПАКЕТЫ МАЕЧКА (Печать от 10 000 шт)
     {
         id: 'mayechka',
         name: 'Пакеты «Маечка»',
         keywords: 'маечка пакет полиэтиленовый майка маркет магазин ручки',
-        colorPriceStep: 1.5, maxColors: 3, defaultQty: 10000, minQty: 10000,
+        colorPriceStep: 1.5, maxColors: 3, defaultQty: 10000, minQty: 10000, allowBagsExtra: false,
         sizes: {
             "270x450 мм (12 мкр)": { w: 270, h: 450, d: 0, orient: "вертикальный", tiers: [{max: Infinity, p: 13}] },
             "300x550 мм (14 мкр)": { w: 300, h: 550, d: 0, orient: "вертикальный", tiers: [{max: Infinity, p: 16}] },
@@ -266,13 +233,11 @@ const propaketCatalog = [
             "500x700 мм (25 мкр)": { w: 500, h: 700, d: 0, orient: "вертикальный", tiers: [{max: Infinity, p: 50.5}] }
         }
     },
-
-    // 18. КОРОБКИ С ПЕЧАТЬЮ (С откидной крышкой)
     {
         id: 'boxes',
         name: 'Коробки самосборные с откидной крышкой',
         keywords: 'коробка коробки печать откидная крышка самосборная упаковка крафт',
-        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
+        colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "90x90x30 мм (Белый / Бурый)": { w: 90, h: 90, d: 30, orient: "квадратный", tiers: [{max: 199, p: 380}, {max: Infinity, p: 350}] },
             "230x170x80 мм (Белый / Бурый)": { w: 230, h: 170, d: 80, orient: "горизонтальный", tiers: [{max: 199, p: 640}, {max: Infinity, p: 610}] },
@@ -281,24 +246,20 @@ const propaketCatalog = [
             "310x210x80 мм (Цветная)": { w: 310, h: 210, d: 80, orient: "горизонтальный", tiers: [{max: 199, p: 1300}, {max: Infinity, p: 1280}] }
         }
     },
-
-    // 19. ТИШЬЮ С ПЕЧАТЬЮ
     {
         id: 'tissue',
         name: 'Тишью упаковочная бумага с печатью',
         keywords: 'тишью бумага упаковка упаковочная печать логотипа 20гр',
-        colorPriceStep: 0, maxColors: 1, defaultQty: 100, minQty: 50,
+        colorPriceStep: 0, maxColors: 1, defaultQty: 100, minQty: 50, allowBagsExtra: false,
         sizes: {
             "510x665 мм (Плотность 20 гр, 1 цвет)": { w: 510, h: 665, d: 0, orient: "листовая", tiers: [{max: 99, p: 320}, {max: 199, p: 250}, {max: 499, p: 245}, {max: Infinity, p: 240}] }
         }
     },
-
-    // 20. САТИНОВЫЕ И СИЛИКОНОВЫЕ ЛЕНТЫ (Цена за 1 метр)
     {
         id: 'ribbons',
         name: 'Ленты сатиновые и силиконовые с печатью (за метр)',
         keywords: 'лента ленты сатиновая сатин матовая классик силиконовая',
-        colorPriceStep: 0, maxColors: 1, defaultQty: 100, minQty: 100,
+        colorPriceStep: 0, maxColors: 1, defaultQty: 100, minQty: 100, allowBagsExtra: false,
         sizes: {
             "Сатиновая матовая 15 мм (цена/м)": { w: 15, h: 1000, d: 0, orient: "рулон", tiers: [{max: 199, p: 175}, {max: 399, p: 170}, {max: Infinity, p: 165}] },
             "Сатиновая матовая 20 мм (цена/м)": { w: 20, h: 1000, d: 0, orient: "рулон", tiers: [{max: 199, p: 185}, {max: 399, p: 175}, {max: Infinity, p: 170}] },
@@ -313,7 +274,7 @@ const propaketCatalog = [
     }
 ];
 
-function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors) {
+function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors, addHandle, addBow) {
     if (!product || !product.sizes[sizeKey]) return { cost: 0, unitPrice: 0, calcQty: qty, meta: null };
     
     let meta = product.sizes[sizeKey];
@@ -327,8 +288,12 @@ function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors) {
     let extraColors = (frontColors - 1) + backColors;
     if (extraColors < 0) extraColors = 0;
     let extraCost = extraColors * (product.colorPriceStep || 0);
+
+    let extraOptionsCost = 0;
+    if (addHandle) extraOptionsCost += 100;
+    if (addBow) extraOptionsCost += 100;
     
-    let unitPrice = basePrice + extraCost;
+    let unitPrice = basePrice + extraCost + extraOptionsCost;
     return {
         unitPrice: unitPrice,
         cost: unitPrice * calcQty,
