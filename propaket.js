@@ -274,11 +274,17 @@ const propaketCatalog = [
     }
 ];
 
-function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors, addHandle, addBow) {
+function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors, addHandle, addBow, boxInside) {
     if (!product || !product.sizes[sizeKey]) return { cost: 0, unitPrice: 0, calcQty: qty, meta: null };
     
     let meta = product.sizes[sizeKey];
-    let calcQty = qty < product.minQty ? product.minQty : qty;
+    
+    let minQty = product.minQty || 1;
+    if (product.id === 'mayechka' && (frontColors + backColors) >= 3) {
+        minQty = 30000;
+    }
+
+    let calcQty = qty < minQty ? minQty : qty;
     let tiers = meta.tiers;
     let tier = tiers.find(t => calcQty <= t.max);
     
@@ -292,12 +298,19 @@ function calculatePropaketItem(product, sizeKey, qty, frontColors, backColors, a
     let extraOptionsCost = 0;
     if (addHandle) extraOptionsCost += 100;
     if (addBow) extraOptionsCost += 100;
+
+    let boxInsideCost = 0;
+    if (product.id === 'boxes') {
+        if (boxInside === 'same') boxInsideCost = 45;
+        else if (boxInside === 'diff') boxInsideCost = 90;
+    }
     
-    let unitPrice = basePrice + extraCost + extraOptionsCost;
+    let unitPrice = basePrice + extraCost + extraOptionsCost + boxInsideCost;
     return {
         unitPrice: unitPrice,
         cost: unitPrice * calcQty,
         calcQty: calcQty,
+        minQty: minQty,
         meta: meta
     };
 }
