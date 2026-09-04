@@ -23,7 +23,7 @@ const propaketCatalog = [
         keywords: 'пакет полиэтиленовый пвд цветной черный шелкография',
         colorPriceStep: 45, maxColors: 3, defaultQty: 100, minQty: 100,
         sizes: {
-            "200x240 мм (вертикальный)": { w: 200, h: 240, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 110}, {max: 499, p: 105}, {max: 19999, p: 100}, {max: Infinity, p: 37}] },
+            "200x240 мм (вертикальный)": { w: 200, h: 240, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 110}, {max: 499, p: 105}, {max: 4999, p: 100}, {max: Infinity, p: 37}] },
             "250x350 мм (вертикальный)": { w: 250, h: 350, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 130}, {max: 499, p: 120}, {max: 4999, p: 110}, {max: Infinity, p: 42}] },
             "300x400 мм (вертикальный)": { w: 300, h: 400, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 140}, {max: 499, p: 130}, {max: 4999, p: 120}, {max: Infinity, p: 47}] },
             "380x530 (400x500) мм (вертикальный)": { w: 380, h: 530, d: 0, orient: "вертикальный", tiers: [{max: 199, p: 150}, {max: 499, p: 140}, {max: 4999, p: 130}, {max: Infinity, p: 61}] },
@@ -212,7 +212,7 @@ const propaketCatalog = [
         colorPriceStep: 45, maxColors: 3, defaultQty: 108, minQty: 108,
         sizes: {
             "150x110x70 мм": { w: 150, h: 110, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 650}, {max: 324, p: 630}, {max: 444, p: 610}, {max: Infinity, p: 590}] },
-            "200x130x70 мм": { w: 200, h: 130, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 630}, {max: 324, p: 690}, {max: 444, p: 670}, {max: Infinity, p: 650}] },
+            "200x130x70 мм": { w: 200, h: 130, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 710}, {max: 324, p: 690}, {max: 444, p: 670}, {max: Infinity, p: 650}] },
             "200x180x70 мм": { w: 200, h: 180, d: 70, orient: "вертикальный", tiers: [{max: 204, p: 750}, {max: 324, p: 730}, {max: 444, p: 710}, {max: Infinity, p: 690}] },
             "250x200x70 мм (горизонтальный)": { w: 250, h: 200, d: 70, orient: "горизонтальный", tiers: [{max: 204, p: 830}, {max: 324, p: 810}, {max: 444, p: 790}, {max: Infinity, p: 770}] },
             "280x210x80 мм": { w: 280, h: 210, d: 80, orient: "горизонтальный", tiers: [{max: 204, p: 970}, {max: 324, p: 950}, {max: 444, p: 930}, {max: Infinity, p: 910}] },
